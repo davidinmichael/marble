@@ -1,0 +1,17 @@
+<ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/register/' %}active{% endif %}" href="#">Sign Up</a>
+    </li>
+    <li class="nav-item justify-content-end">
+      <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="#">Login</a>
+    </li>
+  </ul>
+  
+  
+  <br>
