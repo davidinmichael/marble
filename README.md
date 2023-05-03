@@ -19,11 +19,11 @@ To get a copy of this project up and running on your local machine, follow these
 ### Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/blog-web-app.git
+   git clone https://github.com/davidinmichael/marble.git
    ```
 2. Change into the project directory:
    ```
-   cd blog-web-app
+   cd marble
    ```
 3. Create a virtual environment:
    ```
