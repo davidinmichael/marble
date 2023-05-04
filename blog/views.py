@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import *
 
 def home(request):
+    posts = Post.objects.all()
     context = {
         "title" : "Home",
+        "posts" : posts
     }
     return render(request, "blog/home.html", context)
 
@@ -12,5 +14,3 @@ def about(request):
         "title" : "About",
     }
     return render(request, "blog/about.html", context)
-
-    # https://teams.live.com/meet/9496154298076
