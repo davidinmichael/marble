@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import UserRegisterForm
 from django.http import HttpResponse
 
 def register(request):
-    reg_form = UserCreationForm()
+    reg_form = UserRegisterForm()
     if request.method == "POST":
-        reg_form = UserCreationForm(request.POST)
+        reg_form = UserRegisterForm(request.POST)
         if reg_form.is_valid():
             reg_form.save()
             username = reg_form.cleaned_data.get("username")
