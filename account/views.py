@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
@@ -11,11 +12,9 @@ def register(request):
         if reg_form.is_valid():
             reg_form.save()
             username = reg_form.cleaned_data.get("username")
-            # if reg_form.objects.filter(username=username).exists():
-            #     messages.warning(request, f"User with {username} already exist")
-            #     return redirect("register")
+
             messages.success(request, f"Account created for {username}")
-            return redirect("home")
+            return redirect("login")
         
         else:
             messages.warning(request, "Please fill all fields")
@@ -25,3 +24,21 @@ def register(request):
         "reg_form" : reg_form,
     }
     return render(request, "account/register.html", context)
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, f"{username}, Login Successful")
+            return redirect("home")
+        else:
+            messages.warning(request, "Invalid Email or Password")
+    context = {
+        "title" : "Sign In",
+    }
+    return render(request, "account/login.html", context)
