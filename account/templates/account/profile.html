@@ -1,6 +1,34 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-    <h1>Profile</h1>
+    <h1>{{ user.username }}'s Profile</h1>
+
+    <main>
+        <section class="profile">
+          <div class="profile-picture">
+            {% if profile_user.profile_img %}
+                <img src="{{ profile_user.profile_img.url }}" alt="Profile Picture">
+            
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" alt="Profile Picturee">
+            
+            {% endif %}
+
+          </div>
+          <div class="profile-details">
+            <h2 class="full-name">{{ user.username }}</h2>
+            <p class="username">{{ user.email}}</p>
+            <p class="bio">{{ profile_user.bio }}</p>
+            <a class="editprofile" href="#">Edit Profile</a>
+          </div>
+        </section>
+      </main>
 
 {% endblock content %}
+
+{% if profile.profile_img %}
+                <img src="{{ profile.profile_img.url }}" alt="Profile Picture">
+            {% else %}
+                <img src="{% static 'images/default_img.png' %}" alt="Profile Picture">
+            {% endif %}

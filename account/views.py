@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
+from .models import *
 from django.http import HttpResponse
 
 def register(request):
@@ -51,7 +52,8 @@ def logout_view(request):
 
 @login_required
 def profile(request):
+    profile_user = Profile.objects.get(user=request.user)
     context = {
-
+        "profile_user" : profile_user,
     }
     return render(request, "account/profile.html", context)
