@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
@@ -35,10 +36,22 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"{username}, Login Successful")
-            return redirect("home")
+            return redirect("profile")
         else:
             messages.warning(request, "Invalid Email or Password")
     context = {
         "title" : "Sign In",
     }
     return render(request, "account/login.html", context)
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out")
+    return redirect("login")
+
+@login_required
+def profile(request):
+    context = {
+
+    }
+    return render(request, "account/profile.html", context)
