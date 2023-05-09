@@ -19,8 +19,9 @@
           <div class="profile-details">
             <h2 class="full-name">{{ user.username }}</h2>
             <p class="username">{{ user.email}}</p>
+            <p class="username">{{ profile_user.stack}}</p>
             <p class="bio">{{ profile_user.bio }}</p>
-            <a class="editprofile" href="#">Edit Profile</a>
+            <a class="editprofile" href="{% url 'editprofile' %}">Edit Profile</a>
           </div>
         </section>
       </main>

@@ -16,9 +16,11 @@ def create_profile(sender, instance, created, **kwargs):
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
-post_save.connect(create_profile, sender=User)
-
 # This is another signal handler function that listens to the post_save signal
 # sent by the User model. Whenever a User instance is save
 # (either created or updated), this function simply saves the corresponding
 # Profile instance by calling the save() method of the Profile model.
+
+post_save.connect(create_profile, sender=User)
+# This line of code connects the create_profile function to the post_save
+# signal sent by the User model.
