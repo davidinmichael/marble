@@ -11,7 +11,7 @@
                 <img src="{{ profile_user.profile_img.url }}" alt="Profile Picture">
             
             {% else %}
-                <img src="{% static 'images/default.jpg' %}" alt="Profile Picturee">
+                <img src="{% static 'images/default.jpg' %}" alt="Default Profile Picture">
             
             {% endif %}
 
@@ -26,9 +26,3 @@
       </main>
 
 {% endblock content %}
-
-{% if profile.profile_img %}
-                <img src="{{ profile.profile_img.url }}" alt="Profile Picture">
-            {% else %}
-                <img src="{% static 'images/default_img.png' %}" alt="Profile Picture">
-            {% endif %}
