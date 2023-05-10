@@ -1,3 +1,12 @@
+.small-icon {
+  max-width: 30px;
+  max-height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+
 .navbar-nav {
     width: 100%;
     text-align: center;
@@ -313,4 +322,4 @@ footer {
   .editprofile:hover {
     background-color: #3e8e41;
   }
-  
+    
