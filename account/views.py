@@ -55,6 +55,7 @@ def profile(request):
     profile_user = Profile.objects.get(user=request.user)
     context = {
         "profile_user" : profile_user,
+        "title" : "Profile",
     }
     return render(request, "account/profile.html", context)
 
@@ -78,5 +79,6 @@ def edit_profile(request):
     context = {
         "u_form" : u_form,
         "p_form" : p_form,
+        "title" : "Edit Profile",
     }
     return render(request, "account/editprofile.html", context)
