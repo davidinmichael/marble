@@ -13,6 +13,10 @@
         <a class="nav-link {% if request.path == '/profile/' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/create/' %}active{% endif %}" href="{% url 'post_create' %}">Create Post</a>
+      </li>
+
       <li class="nav-item justify-content-end">
         <a class="nav-link {% if request.path == '/logout/' %}active{% endif %}" href="{% url 'logout' %}">Logout</a>
       </li>
