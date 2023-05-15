@@ -7,7 +7,10 @@
     <img src="{{ post.post_image.url }}" alt="Post Image">
     <p>{{ post.content }}</p>
     <p>Posted by: <img src="{{ post.author.profile.profile_img.url }}" alt="Profile Image" class="small-icon"> {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}</p>
-
-
+    {% if post.author == user %}
+        <a href="{% url 'post_update' post.id %}">Update Post</a>
+        <a href="{% url 'post_delete' post.id %}">Delete Post</a>
+    {% endif %}
+    
 {% endblock content %}
  
