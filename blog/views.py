@@ -1,10 +1,13 @@
 from typing import Any, Dict, Optional
+from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 from .models import *
 
 class PostListView(ListView):
@@ -12,6 +15,17 @@ class PostListView(ListView):
     template_name = 'blog/home.html'
     context_object_name = "posts"
     ordering = ['-date_posted']
+    paginate_by = 3
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blog/user-post.html'
+    context_object_name = "posts"
+    paginate_by = 3
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+    
 
 class PostDetailView(DetailView):
     model = Post
@@ -53,9 +67,8 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.author:
             return True
         else:
-            # messages.warning(request, "You can't edit another User's Post")
-            # return redirect("home")
-            return False
+            messages.warning(self.request, "You can't edit another User's Post")
+            return redirect("home")
     
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)

@@ -2,7 +2,8 @@
 
 {% block content %}
 
-    <h1>Blog Posts - {{ posts.count }}</h1>
+    <h1 class="mb-3">Post By - {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+
     {% for post in posts %}
         <h4><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
        
@@ -10,7 +11,7 @@
               {% if post.post_image %}
                   <img src="{{ post.post_image.url }}" alt="Post Image">
             {% endif %}
-            <p>Posted by: <img src="{{ post.author.profile.profile_img.url }}" alt="Profile Image" class="small-icon"> <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d, Y" }}</p>
+    <p>Posted by: <img src="{{ post.author.profile.profile_img.url }}" alt="Profile Image" class="small-icon">{{ post.author }} on {{ post.date_posted|date:"F d, Y" }}</p>
       
     {% endfor %}
 
@@ -18,7 +19,7 @@
             <!-- Pagination navigation -->
         <div class="pagination">
             <span class="step-links">
-
+                
                 {% if page_obj.has_previous %}
                     <a class="btn btn-outline-info" href="?page=1">&laquo; First</a>
                     <a class="btn btn-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>

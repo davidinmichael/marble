@@ -5,6 +5,17 @@
   border-radius: 50%;
 }
 
+.small-image {
+  max-width: 200px;
+  height: auto;
+}
+
+.small-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
 
 
 .navbar-nav {
