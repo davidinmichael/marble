@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .forms import *
 from .models import *
+from blog.models import *
 from django.http import HttpResponse
 
 def register(request):
@@ -82,3 +84,17 @@ def edit_profile(request):
         "title" : "Edit Profile",
     }
     return render(request, "account/editprofile.html", context)
+
+def user_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    posts = Post.objects.filter(author=user).order_by('-date_posted')
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        "profile" : profile,
+        "page_obj" : page_obj
+    }
+    return render(request, "account/user-profile.html", context)

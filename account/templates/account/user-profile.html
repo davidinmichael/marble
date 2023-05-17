@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <section class="profile">
+        <div class="profile-picture">
+        <h1>{{ profile.user.username }}</h1>
+        <img src="{{ profile.profile_img.url }}" alt="Profile Image">
+        <p>{{ profile.stack }}</p>
+        <p>{{ profile.bio }}</p>
+        <p><a href="{% url 'user-posts' profile.user.username %}">All Posts</a></p>
+    </div>
+    </section> <br><br>
 
-    <h1 class="mb-3">Post By - {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    <h3 class="mb-3">Recent Posts - {{ profile.user.username }} ({{ page_obj.paginator.count }})</h3>
 
-    {% for post in posts %}
+    {% for post in page_obj %}
         <h4><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
        
             
@@ -17,4 +26,3 @@
     {% include "paginator.html" %}
     <br>
 {% endblock content %}
-
