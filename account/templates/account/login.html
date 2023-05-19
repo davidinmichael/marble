@@ -15,12 +15,15 @@
       <input type="password" class="form-control" id="password" name="password">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
+    Forgot Password? <a class="ml-2" href="{% url 'password_reset' %}">Reset Password</a>
+
   </form>
+
 <br>
 <div class="border-top pt-3">
   <small class="text-muted">
       Don't have an Account? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
-  </small>
+    </small>
 </div>
 
 {% endblock content %}
